@@ -15,7 +15,7 @@ Team Lead: Tony Mamedbekov (togrul.mamedbekov@us.sogeti.com)
 | UI/UX | TBA  |  |
 | Sitecore | Tony Mamedbekov | togrul.mamedbekov@us.sogeti.com |
 | Azure | Timothy Brown | timothy.brown@us.sogeti.com |
-| Azure | Hussain Abbasi | hussain.abbasi@us.sogeti.com |
+|  | Hussain Abbasi | hussain.abbasi@us.sogeti.com |
 | App (Xamarin) | Joseph Pinedo (Lead) | joseph.pinedo@us.sogeti.com |
 |  | Khurram Nasir |  khurram.nasirSiddiqi@us.sogeti.com  |
 |  | Sowmith Daram |  sowmith.daram@us.sogeti.com  |
