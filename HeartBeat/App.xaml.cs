@@ -9,7 +9,10 @@ namespace HeartBeat
             InitializeComponent();
 
             MainPage = new HeartBeatPage();
-        }
+        }//patientId
+        //primary key: pEGwJ6Iyvuf+TkxzgVjgz2K2ftqhXYKKQJpahjCHIys=
+        // primary key - connection string: HostName=HearbeatXL.azure-devices.net;DeviceId=patientId;SharedAccessKey=pEGwJ6Iyvuf+TkxzgVjgz2K2ftqhXYKKQJpahjCHIys=
+
 
         protected override void OnStart()
         {
