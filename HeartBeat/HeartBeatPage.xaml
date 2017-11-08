@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:HeartBeat" x:Class="HeartBeat.HeartBeatPage">
-	<Button Text="Heart Failure" VerticalOptions="Center" HorizontalOptions="Center" Clicked="Handle_Clicked"/>
+<StackLayout>
+    <Button Text="Trigger temporarily high hearts rates" VerticalOptions="EndAndExpand" HorizontalOptions="Center" Clicked="Handle_Temp_High_Failure"/>
+    <Button Text="Trigger temporarily low hearts rates" VerticalOptions="StartAndExpand" HorizontalOptions="Center" Clicked="Handle_Temp_Low_Failure" />
+</StackLayout>
 </ContentPage>

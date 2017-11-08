@@ -15,6 +15,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace HeartBeat
 {
@@ -22,18 +23,62 @@ namespace HeartBeat
     {
         static DeviceClient deviceClient;
         private const string _connectionString = "Endpoint=sb://heartbeatxlbus.servicebus.windows.net/;SharedAccessKeyName=Manager;SharedAccessKey=UQLtOGMLk4ubKNriRIY2Ezi8F4fuQdoULjB7swcJLmY=;EntityPath=heartbeatxlqueue";
-        //static string iotHubUri = "{iot hub hostname}";
-        //static string deviceKey = "{device key}";
+        private List<AzureHeartBeat> _highHearts = new List<AzureHeartBeat>()
+        {
+            new AzureHeartBeat() { HeartBeatRate = 190, HeartIsFailing = true },
+            new AzureHeartBeat() { HeartBeatRate = 195, HeartIsFailing = true },
+            new AzureHeartBeat() { HeartBeatRate = 193, HeartIsFailing = true },
+            new AzureHeartBeat() { HeartBeatRate = 199, HeartIsFailing = true },
+            new AzureHeartBeat() { HeartBeatRate = 194, HeartIsFailing = true },
+            new AzureHeartBeat() { HeartBeatRate = 190, HeartIsFailing = true },
+            new AzureHeartBeat() { HeartBeatRate = 190, HeartIsFailing = true },
+            new AzureHeartBeat() { HeartBeatRate = 140, HeartIsFailing = false }
+        };
+        private List<AzureHeartBeat> _lowHeartRates = new List<AzureHeartBeat>()
+        {
+            new AzureHeartBeat() { HeartBeatRate = 30, HeartIsFailing = true },
+            new AzureHeartBeat() { HeartBeatRate = 20, HeartIsFailing = true },
+            new AzureHeartBeat() { HeartBeatRate = 25, HeartIsFailing = true },
+            new AzureHeartBeat() { HeartBeatRate = 39, HeartIsFailing = true },
+            new AzureHeartBeat() { HeartBeatRate = 40, HeartIsFailing = true },
+            new AzureHeartBeat() { HeartBeatRate = 15, HeartIsFailing = true },
+            new AzureHeartBeat() { HeartBeatRate = 23, HeartIsFailing = true },
+            new AzureHeartBeat() { HeartBeatRate = 70, HeartIsFailing = false }
+        };
 
         public HeartBeatPage()
         {
             InitializeComponent();
         }
 
-        async void Handle_Clicked(object sender, System.EventArgs e)
+        async void Handle_Temp_High_Failure(object sender, System.EventArgs e)
         {   
-            var test = await PostOrderDtoToQueue(new AzureHeartBeat() { HeartBeatRate = 110, HeartIsFailing = true }, "heartbeatxlbus","Manager", "UQLtOGMLk4ubKNriRIY2Ezi8F4fuQdoULjB7swcJLmY=", "heartbeatxlqueue");
-            var t = test;
+            try{
+                foreach(AzureHeartBeat beat in _highHearts)
+                {
+                    var response = await PostOrderDtoToQueue(beat, "heartbeatxlbus", "Manager", "UQLtOGMLk4ubKNriRIY2Ezi8F4fuQdoULjB7swcJLmY=", "heartbeatxlqueue");
+                    System.Diagnostics.Debug.WriteLine(response);
+                }
+            }catch(Exception exception)
+            {
+                System.Diagnostics.Debug.WriteLine(exception);
+            }
+        }
+
+        async void Handle_Temp_Low_Failure(object sender, System.EventArgs e)
+        {
+            try
+            {
+                foreach (AzureHeartBeat beat in _lowHeartRates)
+                {
+                    var response = await PostOrderDtoToQueue(beat, "heartbeatxlbus", "Manager", "UQLtOGMLk4ubKNriRIY2Ezi8F4fuQdoULjB7swcJLmY=", "heartbeatxlqueue");
+                    System.Diagnostics.Debug.WriteLine(response);
+                }
+            }
+            catch (Exception exception)
+            {
+                System.Diagnostics.Debug.WriteLine(exception);
+            }        
         }
 
         public const string ServiceBusNamespace = "heartbeatxlbus";
